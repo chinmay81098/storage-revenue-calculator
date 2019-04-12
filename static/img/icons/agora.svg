@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(0.000000, 2.000000)" fill="#1BB978">
+            <path d="M-4.89078404,28.8014593 C-4.88793108,23.7612707 -0.803947812,19.673019 4.23810073,19.6700895 L40.5923454,19.6489673 C45.6312362,19.6460396 49.7137492,23.7338108 49.7108986,28.7697352 L49.7109138,28.7430377 C49.7080608,33.7832264 45.6240775,37.8714781 40.582029,37.8744076 L4.22778436,37.8955298 C-0.811106517,37.8984574 -4.89361947,33.8106862 -4.89076893,28.7747619 L-4.89078404,28.8014593 Z" id="Rectangle" transform="translate(22.410065, 28.772249) rotate(-60.000000) translate(-22.410065, -28.772249) "></path>
+            <circle id="Oval" cx="49" cy="42" r="11"></circle>
+        </g>
+    </g>
+</svg>

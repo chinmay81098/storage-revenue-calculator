@@ -1,0 +1,36 @@
+.section {
+  margin-bottom: 30px;
+}
+
+
+.bg-gradient-primary {
+  background: linear-gradient(87deg, #0e1852 0, #4877bd 100%) !important;
+}
+
+.media-body {
+  text-align: left;
+  margin-left: 10px;
+}
+
+.text-icon {
+  background: #EEEEEE;
+  border-radius: 100%;
+  text-align: center;
+  width: 35px;
+  height: 35px;
+  padding: 7px 0;
+  font-size: 14px;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.see-more {
+  background-color: rgba(0, 160, 240, 0.2);
+  color: #135bff;
+  text-align: center;
+  padding: 10px 0;
+}
