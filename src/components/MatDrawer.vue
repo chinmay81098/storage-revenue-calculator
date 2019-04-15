@@ -1,22 +1,26 @@
 <template>
   <div>
+    <div class="mb-4 text-right">
+      <a href="#">
+        Help
+        <i class="fas fa-times-circle"></i>
+      </a>
+    </div>
     <div class="mat-drawer-inner-container" style="height: auto;"><!----><span  mwlresizehandle=""
                                                                                class="ng-tns-c1-0 ng-star-inserted"
                                                                                style=""></span>
       <div  class="help-list ng-tns-c1-0"><!---->
         <div  class="help-item ng-tns-c1-0 ng-star-inserted" id="help-0" style="">
           <div  class="help-title">Estimator Deep Dive</div>
-          <div  class="help-content">The calculations are explained in this <a target="_blank"
-                                                                                               href="https://storj.io/blog/2019/01/sharing-storage-space-for-fun-and-profit/">blog
-            post</a>.
+          <div  class="help-content">The calculations are explained in this blog
+            post.
           </div>
         </div>
         <div  class="help-item ng-tns-c1-0 ng-star-inserted" id="help-1" style="">
           <div  class="help-title">Minimum Requirements</div>
           <div  class="help-content">If the slider turns red, your setting is below the minimum
-            recommended requirement. These minimum Storage Node requirements are explained in this <a target="_blank"
-                                                                                                      href="https://storj.io/blog/2019/01/we-need-great-storage-node-operators-for-the-v3-network-have-you-got-what-it-takes-to-succeed/">blog
-              post</a>.
+            recommended requirement. These minimum Storage Node requirements are explained in this blog
+              post.
           </div>
         </div>
         <div  class="help-item ng-tns-c1-0 ng-star-inserted" id="help-2" style="">

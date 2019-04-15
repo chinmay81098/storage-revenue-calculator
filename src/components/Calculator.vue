@@ -6,7 +6,7 @@
         Potential 15 month revenue
       </div>
       <div class="col-sm-6">
-        <span class="revenue-highlight">${{revenueTotal}}</span>
+        <span class="revenue-highlight">$ {{(monthlyRevenue[0].storageCost + monthlyRevenue[0].egressCost + monthlyRevenue[0].repairCost)*15}}</span>
       </div>
       </div>
     </div>
@@ -54,36 +54,36 @@
           <tbody>
           <tr v-for="item in monthlyRevenue" :key="item.number">
             <td  class="mat-cell cdk-column-month mat-column-month ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">1
+                 role="gridcell">{{item.number}}
             </td>
             <td  class="mat-cell cdk-column-storage mat-column-storage ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">{{sliderObject.availableStorage}}
+                 role="gridcell">{{item.storage}}
             </td>
             <td class="mat-cell cdk-column-storageRevenue mat-column-storageRevenue ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">$ 1
+                 role="gridcell">$ {{item.storageCost}}
             </td>
             <td  class="mat-cell cdk-column-egress mat-column-egress ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">0.68
+                 role="gridcell"> {{item.egress}}
             </td>
             <td class="mat-cell cdk-column-egressRevenue mat-column-egressRevenue ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">$ 14
+                 role="gridcell">$ {{item.egressCost}}
             </td>
             <td  class="mat-cell cdk-column-repair mat-column-repair ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">0.08
+                 role="gridcell">{{item.repair}}
             </td>
             <td class="mat-cell cdk-column-repairRevenue mat-column-repairRevenue ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">$ 1
+                 role="gridcell">$ {{item.repairCost}}
             </td>
             <td class="rev mat-cell cdk-column-total mat-column-total ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">$ 16
+                 role="gridcell">$ {{item.storageCost + item.egressCost + item.repairCost}}
             </td>
             <td class="wh mat-cell cdk-column-withholding mat-column-withholding ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">$ 12
+                 role="gridcell">$ {{heldAmount(item.storageCost + item.egressCost + item.repairCost, item.number)}}
             </td>
-            <td class="mat-cell cdk-column-netRevenue mat-column-netRevenue ng-tns-c1-0 ng-star-inserted" role="gridcell">$ 4
+            <td class="mat-cell cdk-column-netRevenue mat-column-netRevenue ng-tns-c1-0 ng-star-inserted" role="gridcell">$ {{netAmount(item.storageCost + item.egressCost + item.repairCost, item.number)}}
             </td>
             <td class="mat-cell cdk-column-withholdingRunTotal mat-column-withholdingRunTotal ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">$ 12
+                 role="gridcell">$ {{runningAmount(heldAmount(item.storageCost + item.egressCost + item.repairCost, item.number), item.number)}}
             </td>
           </tr>
           </tbody>
@@ -96,20 +96,20 @@
             <td class="mat-footer-cell cdk-column-storage mat-column-storage ng-tns-c1-0 ng-star-inserted"
                  role="gridcell"></td>
             <td class="mat-footer-cell cdk-column-storageRevenue mat-column-storageRevenue ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">$ 117
+                 role="gridcell">$ {{monthlyRevenue[0].storageCost*15}}
             </td>
             <td class="mat-footer-cell cdk-column-egress mat-column-egress ng-tns-c1-0 ng-star-inserted"
                  role="gridcell"></td>
             <td class="mat-footer-cell cdk-column-egressRevenue mat-column-egressRevenue ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">$ 204
+                 role="gridcell">$ {{monthlyRevenue[0].egressCost*15}}
             </td>
             <td class="mat-footer-cell cdk-column-repair mat-column-repair ng-tns-c1-0 ng-star-inserted"
                  role="gridcell"></td>
             <td class="mat-footer-cell cdk-column-repairRevenue mat-column-repairRevenue ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">$ 12
+                 role="gridcell">$ {{monthlyRevenue[0].repairCost*15}}
             </td>
             <td class="rev mat-footer-cell cdk-column-total mat-column-total ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">$ 333
+                 role="gridcell">$ {{(monthlyRevenue[0].storageCost + monthlyRevenue[0].egressCost + monthlyRevenue[0].repairCost)*15}}
             </td>
             <td class="wh mat-footer-cell cdk-column-withholding mat-column-withholding ng-tns-c1-0 ng-star-inserted"
                  role="gridcell">$ 44
@@ -131,12 +131,50 @@
 
 export default {
   name: 'Calculator',
-  props: ['sliderObject'],
+  props: ['monthlyRevenue'],
   data () {
     return {
       revenueTotal: 100,
-      monthlyRevenue: []
+      storagePrice: 1.5,
+      egressPrice: 20,
+      repairPrice: 10,
+      heldCost: 0
     }
+  },
+  methods: {
+    heldAmount (total, month) {
+      if(month === 15) {
+        return -this.heldCost/2;
+      }
+      else if(month <=3) {
+        return total*0.75;
+      } else if(month <=6) {
+        return total*0.5;
+      } else if(month <=9) {
+        return total*0.25;
+      } else {
+        return 0;
+      }
+    },
+    netAmount (total, month) {
+      if(month === 15) {
+        return -this.heldCost/2;
+      }
+      else if(month <=3) {
+        return total*0.25;
+      } else if(month <=6) {
+        return total*0.5;
+      } else if(month <=9) {
+        return total*0.75;
+      } else {
+        return total;
+      }
+    },
+    runningAmount (heldAmount, month) {
+      this.heldCost += heldAmount;
+      return this.heldCost
+    }
+
   }
 }
 </script>

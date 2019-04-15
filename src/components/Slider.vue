@@ -1,11 +1,17 @@
 <template>
   <div>
+    <div class="mb-4">
+      <a href="#">
+        <i class="fas fa-wifi"></i>
+        <span>Speed Test</span>
+      </a>
+    </div>
     <div class="row slider-section">
       <div class="col-sm-2 slider-text">
         Available Storage
       </div>
       <div class="col-sm-9">
-        <vue-slider ref="availableStorage" v-on:change="calculate" v-model="sliderObject.availableStorage" v-bind="sliderOptions" />
+        <vue-slider ref="availableStorage" v-on:change="calculate" v-model="sliderObject.availableStorage" v-bind="storageSliderOptions" />
       </div>
       <div class="col-sm-1 slider-text">{{sliderObject.availableStorage}} TB</div>
     </div>
@@ -14,7 +20,7 @@
         Download Speed
       </div>
       <div class="col-sm-9">
-        <vue-slider ref="downloadSpeed" v-model="sliderObject.downloadSpeed" v-bind="speedSliderOptions" />
+        <vue-slider ref="downloadSpeed" v-on:change="calculate" v-model="sliderObject.downloadSpeed" v-bind="speedSliderOptions" />
       </div>
       <div class="col-sm-1 slider-text">{{sliderObject.downloadSpeed}} Mbps</div>
     </div>
@@ -23,7 +29,7 @@
         Upload Speed
       </div>
       <div class="col-sm-9">
-        <vue-slider ref="uploadSpeed" v-model="sliderObject.uploadSpeed" v-bind="speedSliderOptions" />
+        <vue-slider ref="uploadSpeed" v-on:change="calculate" v-model="sliderObject.uploadSpeed" v-bind="speedSliderOptions" />
       </div>
       <div class="col-sm-1 slider-text">{{sliderObject.uploadSpeed}} Mbps</div>
     </div>
@@ -32,7 +38,7 @@
         Available Bandwidth
       </div>
       <div class="col-sm-9">
-        <vue-slider ref="availableBandwidth" v-model="sliderObject.availableBandwidth" v-bind="sliderOptions" />
+        <vue-slider ref="availableBandwidth" v-on:change="calculate"  v-model="sliderObject.availableBandwidth" v-bind="sliderOptions" />
       </div>
       <div class="col-sm-1 slider-text">{{sliderObject.availableBandwidth}}% </div>
     </div>
@@ -41,7 +47,7 @@
         Bandwidth Cap
       </div>
       <div class="col-sm-9">
-        <vue-slider ref="bandwidthCap" v-model="sliderObject.bandwidthCap" v-bind="sliderOptions" />
+        <vue-slider ref="bandwidthCap" v-on:change="calculate" v-model="sliderObject.bandwidthCap" v-bind="sliderOptions" />
       </div>
       <div class="col-sm-1 slider-text">{{sliderObject.bandwidthCap}} TB </div>
     </div>
@@ -50,7 +56,7 @@
         Network Utilization
       </div>
       <div class="col-sm-9">
-        <vue-slider ref="networkUtilization" v-model="sliderObject.networkUtilization" v-bind="sliderOptions" />
+        <vue-slider ref="networkUtilization" v-on:change="calculate" v-model="sliderObject.networkUtilization" v-bind="utilizationSliderOptions" />
       </div>
       <div class="col-sm-1 slider-text">{{sliderObject.networkUtilization}}%</div>
     </div>
@@ -69,7 +75,7 @@ export default {
   data () {
     return {
       sliderObject: {
-        availableStorage: 40,
+        availableStorage: 10,
         downloadSpeed: 14.1,
         uploadSpeed: 16,
         bandwidthCap: 28,
@@ -96,6 +102,16 @@ export default {
         data: null,
         min: 0,
         max: 50
+      },
+      storageSliderOptions: {
+        dotSize: 20,
+        width: 'auto',
+        height: 4,
+        contained: false,
+        direction: 'ltr',
+        data: null,
+        min: 0,
+        max: 20
       },
       sliderOptions: {
         dotSize: 20,
@@ -134,6 +150,9 @@ export default {
         labelActiveStyle: void 0
       }
     }
+  },
+  created () {
+    this.$emit('init', this.sliderObject)
   },
   methods: {
     calculate () {
