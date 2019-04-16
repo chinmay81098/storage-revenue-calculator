@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="card-content">
-      <div class="col-sm-12">
+      <div class="col-sm-12" style="overflow-x:scroll;">
         <table  class="mat-table ng-trigger ng-trigger-columnsToggle" mat-table="" role="grid">
           <thead><!---->
           <tr  class="mat-header-row ng-tns-c1-0 ng-star-inserted" mat-header-row="" role="row"
