@@ -200,7 +200,6 @@ export default {
   }
   table {
     border-collapse: collapse;
-    table-layout: fixed;
     width: 100%;
     text-align: right;
   }
