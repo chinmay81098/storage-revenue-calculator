@@ -6,7 +6,7 @@
         Potential 15 month revenue
       </div>
       <div class="col-sm-6">
-        <span class="revenue-highlight">$ {{(monthlyRevenue[0].storageCost + monthlyRevenue[0].egressCost + monthlyRevenue[0].repairCost)*15}}</span>
+        <span class="revenue-highlight">$ {{totalRevenue()}}</span>
       </div>
       </div>
     </div>
@@ -96,20 +96,20 @@
             <td class="mat-footer-cell cdk-column-storage mat-column-storage ng-tns-c1-0 ng-star-inserted"
                  role="gridcell"></td>
             <td class="mat-footer-cell cdk-column-storageRevenue mat-column-storageRevenue ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">$ {{monthlyRevenue[0].storageCost*15}}
+                 role="gridcell">$
             </td>
             <td class="mat-footer-cell cdk-column-egress mat-column-egress ng-tns-c1-0 ng-star-inserted"
                  role="gridcell"></td>
             <td class="mat-footer-cell cdk-column-egressRevenue mat-column-egressRevenue ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">$ {{monthlyRevenue[0].egressCost*15}}
+                 role="gridcell">$
             </td>
             <td class="mat-footer-cell cdk-column-repair mat-column-repair ng-tns-c1-0 ng-star-inserted"
                  role="gridcell"></td>
             <td class="mat-footer-cell cdk-column-repairRevenue mat-column-repairRevenue ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">$ {{monthlyRevenue[0].repairCost*15}}
+                 role="gridcell">$
             </td>
             <td class="rev mat-footer-cell cdk-column-total mat-column-total ng-tns-c1-0 ng-star-inserted"
-                 role="gridcell">$ {{(monthlyRevenue[0].storageCost + monthlyRevenue[0].egressCost + monthlyRevenue[0].repairCost)*15}}
+                 role="gridcell">$ {{totalRevenue()}}
             </td>
             <td class="wh mat-footer-cell cdk-column-withholding mat-column-withholding ng-tns-c1-0 ng-star-inserted"
                  role="gridcell">$ 44
@@ -131,7 +131,12 @@
 
 export default {
   name: 'Calculator',
-  props: ['monthlyRevenue'],
+  props: {
+    'monthlyRevenue' : {
+      default: [],
+      type: Array
+    }
+  },
   data () {
     return {
       revenueTotal: 100,
@@ -142,6 +147,14 @@ export default {
     }
   },
   methods: {
+    totalRevenue () {
+      if (this.monthlyRevenue && this.monthlyRevenue.length) {
+        let firstMonth = this.monthlyRevenue[0]
+        return (firstMonth.storageCost + firstMonth.egressCost + firstMonth.repairCost) * 15
+      } else {
+        return 0
+      }
+    },
     heldAmount (total, month) {
       if(month === 15) {
         return -this.heldCost/2;
@@ -171,7 +184,7 @@ export default {
       }
     },
     runningAmount (heldAmount, month) {
-      this.heldCost += heldAmount;
+      // heldCost += heldAmount;
       return this.heldCost
     }
 

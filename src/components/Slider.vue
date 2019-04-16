@@ -156,14 +156,6 @@ export default {
   },
   methods: {
     calculate () {
-      // this.sliderObject = {
-      //   availableStorage: this.$refs.availableStorage.getValue(),
-      //   downloadSpeed: this.$refs.downloadSpeed.getValue(),
-      //   uploadSpeed: this.$refs.uploadSpeed.getValue(),
-      //   bandwidthCap: this.$refs.bandwidthCap.getValue(),
-      //   availableBandwidth: this.$refs.availableBandwidth.getValue(),
-      //   networkUtilization: this.$refs.networkUtilization.getValue()
-      // }
       this.$emit('changed', this.sliderObject)
     }
   }
