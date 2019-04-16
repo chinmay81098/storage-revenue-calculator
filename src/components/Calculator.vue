@@ -37,10 +37,10 @@
             <th class="mat-header-cell cdk-column-repairRevenue mat-column-repairRevenue ng-tns-c1-0 ng-star-inserted"
                  role="columnheader">Repair Revenue
             </th>
-            <th class="rev mat-header-cell cdk-column-total mat-column-total ng-tns-c1-0 ng-star-inserted"
+            <th class="rev mat-header-cell cdk-column-total revenue"
                  role="columnheader">Total Revenue
             </th>
-            <th class="wh mat-header-cell cdk-column-withholding mat-column-withholding ng-tns-c1-0 ng-star-inserted"
+            <th class="held mat-header-cell cdk-column-withholding mat-column-withholding ng-tns-c1-0 ng-star-inserted"
                  role="columnheader">Held Amount
             </th>
             <th class="mat-header-cell cdk-column-netRevenue mat-column-netRevenue ng-tns-c1-0 ng-star-inserted"
@@ -74,10 +74,10 @@
             <td class="mat-cell cdk-column-repairRevenue mat-column-repairRevenue ng-tns-c1-0 ng-star-inserted"
                  role="gridcell">$ {{item.repairCost}}
             </td>
-            <td class="rev mat-cell cdk-column-total mat-column-total ng-tns-c1-0 ng-star-inserted"
+            <td class="rev mat-cell cdk-column-total mat-column-total revenue"
                  role="gridcell">$ {{item.storageCost + item.egressCost + item.repairCost}}
             </td>
-            <td class="wh mat-cell cdk-column-withholding mat-column-withholding ng-tns-c1-0 ng-star-inserted"
+            <td class="held mat-cell cdk-column-withholding mat-column-withholding"
                  role="gridcell">$ {{heldAmount(item.storageCost + item.egressCost + item.repairCost, item.number)}}
             </td>
             <td class="mat-cell cdk-column-netRevenue mat-column-netRevenue ng-tns-c1-0 ng-star-inserted" role="gridcell">$ {{netAmount(item.storageCost + item.egressCost + item.repairCost, item.number)}}
@@ -108,10 +108,10 @@
             <td class="mat-footer-cell cdk-column-repairRevenue mat-column-repairRevenue ng-tns-c1-0 ng-star-inserted"
                  role="gridcell">$
             </td>
-            <td class="rev mat-footer-cell cdk-column-total mat-column-total ng-tns-c1-0 ng-star-inserted"
+            <td class="revenue mat-footer-cell cdk-column-total mat-column-total ng-tns-c1-0 ng-star-inserted"
                  role="gridcell">$ {{totalRevenue()}}
             </td>
-            <td class="wh mat-footer-cell cdk-column-withholding mat-column-withholding ng-tns-c1-0 ng-star-inserted"
+            <td class="held mat-footer-cell cdk-column-withholding mat-column-withholding ng-tns-c1-0 ng-star-inserted"
                  role="gridcell">$ 44
             </td>
             <td class="mat-footer-cell cdk-column-netRevenue mat-column-netRevenue ng-tns-c1-0 ng-star-inserted"
@@ -197,5 +197,31 @@ export default {
   .revenue-highlight {
     color: #2683ff;
     font-size: 1.4em;
+  }
+  table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    text-align: right;
+  }
+  table th {
+    font-weight: 400;
+    color: rgba(0, 0, 0, .54);
+    font-size: 14px;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ccc;
+  }
+  table th.revenue, table td.revenue {
+    background: rgba(38,131,255,.1)!important
+  }
+  table th.held, table td.held {
+    background: rgba(255,196,37,.1)!important
+  }
+  table tr td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #ccc;
+  }
+  table tr:nth-child(even){
+    background: #f5f5f5;
   }
 </style>
